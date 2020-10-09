@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage" : "https://barteknowicki.github.io/kwadraty/",
+  "homepage" : "https://barteknowicki.github.io/hangman/",
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.js --inline --progress --colors",
     "prod": "webpack --config ./config/webpack.config.prod.js",
