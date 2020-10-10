@@ -1,6 +1,9 @@
+import { TimelineMax } from "gsap/all"; 
+
 export default class Phrase {
-    constructor(text, maxErrors) {
+    constructor(text, maxErrors, animationContainer) {
         console.log('phrase constructor got: ', text);
+        this.animationContainer = animationContainer;
         this.text = text;
         this.guessAttemptsSuccessful = [];
         this.guessAttemptsFailed = [];
@@ -9,6 +12,25 @@ export default class Phrase {
         this.maxErrors = maxErrors;
     }
     
+    animateBoom = (stage) => {
+        // console.log(stage);
+
+        if (stage !== 10) {
+            const tl = new TimelineMax({ repeat: 0, repeatDelay: 0, delay: 0 });
+        tl
+        .set(this.animationContainer, { transformOrigin: "50% 50%" })
+        .to(this.animationContainer, { duration: 3, rotation: stage*360/this.maxErrors, scale: stage/this.maxErrors + 0.02})
+        } else {
+            const tl = new TimelineMax({ duration: 0, repeat: 0, repeatDelay: 0, delay: 0 });
+        tl
+        // .set(this.animationContainer, { transformOrigin: "50% 50%" })        
+        .to(this.animationContainer, { duration: 1, rotation: -360, scale: 0.1 })
+        .to(this.animationContainer, { duration: 2, rotation: 360, scale: 500})
+        }
+        
+
+    }
+
     checkIfGameOver = (container) => {        
         if (container.id === 'phraseWrap' && !container.innerText.includes('_')) {
             // console.log('wygrałaś!');
@@ -41,15 +63,15 @@ export default class Phrase {
     }
 
     updateUsed = (container) => {
-        // container.innerText = `wykorzystane literki: ${this.guessAttemptsFailed.join(', ')}`;
+        this.animateBoom(this.guessAttemptsFailed.length);
         this.checkIfGameOver(container);
     }
 
-    checkLetterandUpdate = (letter, containerPhrase, containerUsed, event) => {
+    checkLetterandUpdate = (letter, containerPhrase, containerStatus, event) => {
         event.target.disabled = true;
         if (!this.text.includes(letter)) {
             this.guessAttemptsFailed.push(letter);
-            this.updateUsed(containerUsed);
+            this.updateUsed(containerStatus);
             return
         }
         this.guessAttemptsSuccessful.push(letter);

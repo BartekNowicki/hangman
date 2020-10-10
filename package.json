@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage" : "https://barteknowicki.github.io/hangman/",
+  "homepage": "https://barteknowicki.github.io/hangman/",
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.js --inline --progress --colors",
     "prod": "webpack --config ./config/webpack.config.prod.js",
@@ -37,9 +37,9 @@
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.8.0"
   },
-
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
+    "gsap": "^3.5.1",
     "jquery": "^3.4.1"
   }
 }
