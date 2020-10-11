@@ -1,5 +1,6 @@
 import Phrase from './Phrase';
 import {phraseList} from './phraseList';
+import statusPic from './images/boom.svg';
 
 class Game {
     constructor(elements, maxErrors) {
@@ -11,10 +12,10 @@ class Game {
         this.phraseWrap = elements.phraseWrap;
         this.categoryWrap = elements.categoryWrap;
         this.lettersWrap = elements.lettersWrap;
-        this.status = elements.status;
+        this.statusDiv = elements.status;
         this.phrases = phraseList();
         const {text, category} = this.phrases[Math.floor(Math.random()*this.phrases.length)];
-        this.phrase = new Phrase(text, this.maxErrors, this.status);
+        this.phrase = new Phrase(text, this.maxErrors, this.statusDiv);
         this.categoryWrap.innerText = 'kategoria: ' + category;
         // console.log(this.categoryWrap);
         // console.log(text, category);
@@ -43,7 +44,7 @@ class Game {
     }
 
     clickedLetter = (letter, event) => {
-        this.phrase.checkLetterandUpdate(letter, this.phraseWrap, this.status, event);
+        this.phrase.checkLetterandUpdate(letter, this.phraseWrap, this.statusDiv, event);
         this.updateStatus();
     }
 
@@ -64,8 +65,8 @@ class Game {
         this.updateStatus();
         this.phrase.updatePhrase(this.phraseWrap);
         this.phrase.animateBoom(0);
-        console.log(this.status.img);
-        
+        document.querySelector(".statusImg").src = statusPic;
+        // console.log(document.querySelector(".statusImg").src);        
     }
   }
 

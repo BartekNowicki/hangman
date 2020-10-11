@@ -75,10 +75,12 @@ body {
   // border: 1px solid blue;
 }
 
-.boom {
+.status {
   width: 100%;
   height: 100%;
-  background-image: url(../images/boom.svg);
+  // background-image: url(../images/boom.svg);
+  //need to hide border from gh pages
+  // border: 0px solid rgba(0, 0, 0, 0);
 }
 
 // #phraseWrap{}
