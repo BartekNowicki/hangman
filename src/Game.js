@@ -64,6 +64,8 @@ class Game {
         this.updateStatus();
         this.phrase.updatePhrase(this.phraseWrap);
         this.phrase.animateBoom(0);
+        console.log(this.status.img);
+        
     }
   }
 
