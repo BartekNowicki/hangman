@@ -2,7 +2,6 @@ import { TimelineMax } from "gsap/all";
 
 export default class Phrase {
     constructor(text, maxErrors, animationContainer) {
-        console.log('phrase constructor got: ', text);
         this.animationContainer = animationContainer;
         this.text = text;
         this.guessAttemptsSuccessful = [];
@@ -13,8 +12,6 @@ export default class Phrase {
     }
     
     animateBoom = (stage) => {
-        // console.log(stage);
-
         if (stage !== 10) {
             const tl = new TimelineMax({ repeat: 0, repeatDelay: 0, delay: 0 });
         tl
@@ -23,20 +20,15 @@ export default class Phrase {
         } else {
             const tl = new TimelineMax({ duration: 0, repeat: 0, repeatDelay: 0, delay: 0 });
         tl
-        // .set(this.animationContainer, { transformOrigin: "50% 50%" })        
         .to(this.animationContainer, { duration: 1, rotation: -360, scale: 0.1 })
         .to(this.animationContainer, { duration: 2, rotation: 360, scale: 500})
         }
-        
-
     }
 
     checkIfGameOver = (container) => {        
         if (container.id === 'phraseWrap' && !container.innerText.includes('_')) {
-            // console.log('wygrałaś!');
             this.won = true;
         } else if (this.guessAttemptsFailed.length === this.maxErrors) {
-            // console.log('przegrałaś!');
             this.lost = true;
         };
         return [this.won, this.lost];
@@ -49,9 +41,12 @@ export default class Phrase {
     updatePhrase = (container) => {
         let content = '';
         for (const char of this.text) {
-            // console.log('checking char: ', char);
             if (!this.guessAttemptsSuccessful.length) {
-            if (char !== ' '){content += ' _ ';} else {content += '  ';}
+            if (char !== ' '){
+                content += ' _ ';
+            } else {
+                content += '  ';
+            }
           } else if (this.letterInPhrase(char)) {
             content += char;
             } else if (char !== ' '){

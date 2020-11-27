@@ -1,5 +1,5 @@
 import Phrase from './Phrase';
-import {phraseList} from './phraseList';
+import { phraseList } from './phraseList';
 import statusPic from './images/boom.svg';
 
 class Game {
@@ -14,20 +14,17 @@ class Game {
         this.lettersWrap = elements.lettersWrap;
         this.statusDiv = elements.status;
         this.phrases = phraseList();
-        const {text, category} = this.phrases[Math.floor(Math.random()*this.phrases.length)];
+        const { text, category } = this.phrases[Math.floor(Math.random()*this.phrases.length)];
         this.phrase = new Phrase(text, this.maxErrors, this.statusDiv);
         this.categoryWrap.innerText = 'kategoria: ' + category;
-        // console.log(this.categoryWrap);
-        // console.log(text, category);
-        // console.log(this.lettersWrap);
         this.init();
     }
     
-    endGame = () => {console.log(this.result);
+    endGame = () => {
+        // console.log(this.result);
         const buttons = this.lettersWrap.querySelectorAll('button');
         buttons.forEach(button => button.disabled = true);
         this.feedbackWrap.innerText = this.result === 'won' ? 'BRAWO!' : '';
-    
     }
 
     updateStatus = () => {
@@ -59,14 +56,11 @@ class Game {
     };
 
     init = () => {
-        // console.log('created instance of: ', this);
-        // console.log(this.text, this.category);
         this.initializeLetters();
         this.updateStatus();
         this.phrase.updatePhrase(this.phraseWrap);
         this.phrase.animateBoom(0);
         document.querySelector(".statusImg").src = statusPic;
-        // console.log(document.querySelector(".statusImg").src);        
     }
   }
 
